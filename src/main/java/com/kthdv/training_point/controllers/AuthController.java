@@ -1,7 +1,7 @@
 package com.kthdv.training_point.controllers;
 
 import com.kthdv.training_point.models.dto.UserDto;
-import com.kthdv.training_point.models.response.UserID;
+import com.kthdv.training_point.models.response.UserIdentify;
 import com.kthdv.training_point.services.UserAuthService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,13 +30,13 @@ public class AuthController {
 
     @ApiOperation(value = "Login", response = Iterable.class)
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Login success", response = UserID.class),
+            @ApiResponse(code = 200, message = "Login success", response = UserIdentify.class),
             @ApiResponse(code = 404, message = "Account not registered"),
             @ApiResponse(code = 403, message = "Wrong password")
     })
     @PostMapping("/login")
-    public ResponseEntity<UserID> login(@RequestParam("username") String username,
-                                        @RequestParam("password") String password) {
+    public ResponseEntity<UserIdentify> login(@RequestParam("username") String username,
+                                              @RequestParam("password") String password) {
         return userAuthService.login(username, password);
     }
 }
