@@ -13,5 +13,10 @@ public interface AdviserFeedbackRepository extends JpaRepository<AdviserFeedback
             "where af.adviserID = u.id")
     List<FormFeedback> getAllAdviserFeedback();
 
+    @Query("select new com.kthdv.training_point.models.response.FormFeedback(u, af) " +
+            "from AdviserFeedback af, User u " +
+            "where af.userID = ?1 and af.adviserID = u.id")
+    FormFeedback getAdviserFormFeedback(String userID);
+
     void deleteByUserID(String userID);
 }

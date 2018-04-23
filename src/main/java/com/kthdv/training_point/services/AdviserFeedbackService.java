@@ -23,6 +23,10 @@ public class AdviserFeedbackService {
         return new ResponseEntity<>(adviserFeedbackRepository.getAllAdviserFeedback(), HttpStatus.OK);
     }
 
+    public ResponseEntity<FormFeedback> getAdviserFeedback(String studentID) {
+        return new ResponseEntity<>(adviserFeedbackRepository.getAdviserFormFeedback(studentID), HttpStatus.OK);
+    }
+
     @Transactional
     public ResponseEntity submitFeedback(String adviserID, String formID, String state) {
         adviserReceivedFormRepository.deleteByUserID(formID);
