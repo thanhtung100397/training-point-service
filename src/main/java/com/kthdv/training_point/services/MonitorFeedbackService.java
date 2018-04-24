@@ -34,10 +34,11 @@ public class MonitorFeedbackService {
     public ResponseEntity submitFeedback(String formID, String state) {
         if(state.equals(Constant.ACCEPTED_STATE)) {
             adviserReceivedFormRepository.save(new AdviserReceivedForm(formID));
+        } else {
+            monitorFeedbackRepository.save(new MonitorFeedback(formID, state));
         }
         adviserFeedbackRepository.deleteByUserID(formID);
         monitorReceivedFormRepository.deleteByUserID(formID);
-        monitorFeedbackRepository.save(new MonitorFeedback(formID, state));
         return new ResponseEntity(HttpStatus.OK);
     }
 }
