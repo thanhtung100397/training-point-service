@@ -1,8 +1,6 @@
 package com.kthdv.training_point.services;
 
-import com.kthdv.training_point.dao.MonitorFeedbackRepository;
-import com.kthdv.training_point.dao.MonitorReceivedFormRepository;
-import com.kthdv.training_point.dao.TrainingPointFormRepository;
+import com.kthdv.training_point.dao.*;
 import com.kthdv.training_point.models.entity.MonitorReceivedForm;
 import com.kthdv.training_point.models.entity.TrainingPointForm;
 import com.kthdv.training_point.models.response.StudentTrainingPointForm;
@@ -22,6 +20,10 @@ public class TrainingPointFormService {
     private MonitorReceivedFormRepository monitorReceivedFormRepository;
     @Autowired
     private MonitorFeedbackRepository monitorFeedbackRepository;
+    @Autowired
+    private AdviserFeedbackRepository adviserFeedbackRepository;
+    @Autowired
+    private AdviserReceivedFormRepository adviserReceivedFormRepository;
 
     public ResponseEntity<StudentTrainingPointForm> getTrainingPointFormDetail(String userID) {
         return new ResponseEntity<>(trainingPointFormRepository.getTrainingPointFormDetail(userID), HttpStatus.OK);
@@ -34,8 +36,10 @@ public class TrainingPointFormService {
             trainingPointFormFound = new TrainingPointForm(userID, formData);
         } else {
             trainingPointFormFound.update(formData);
+            monitorFeedbackRepository.deleteByUserID(userID);
+            adviserFeedbackRepository.deleteByUserID(userID);
+            adviserReceivedFormRepository.deleteByUserID(userID);
         }
-        monitorFeedbackRepository.deleteByUserID(userID);
         trainingPointFormRepository.save(trainingPointFormFound);
         monitorReceivedFormRepository.save(new MonitorReceivedForm(userID));
         return new ResponseEntity(HttpStatus.OK);
