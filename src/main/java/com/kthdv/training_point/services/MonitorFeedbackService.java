@@ -31,13 +31,13 @@ public class MonitorFeedbackService {
     }
 
     @Transactional
-    public ResponseEntity submitFeedback(String monitorID, String formID, String state) {
+    public ResponseEntity submitFeedback(String formID, String state) {
         if(state.equals(Constant.ACCEPTED_STATE)) {
             adviserReceivedFormRepository.save(new AdviserReceivedForm(formID));
         }
         adviserFeedbackRepository.deleteByUserID(formID);
         monitorReceivedFormRepository.deleteByUserID(formID);
-        monitorFeedbackRepository.save(new MonitorFeedback(formID, monitorID, state));
+        monitorFeedbackRepository.save(new MonitorFeedback(formID, state));
         return new ResponseEntity(HttpStatus.OK);
     }
 }

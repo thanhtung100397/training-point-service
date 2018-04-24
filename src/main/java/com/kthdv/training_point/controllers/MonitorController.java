@@ -59,19 +59,19 @@ public class MonitorController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return monitorFeedbackService.submitFeedback(monitorID, studentID, state);
+        return monitorFeedbackService.submitFeedback(studentID, state);
     }
 
-//    @ApiOperation(value = "Get monitor feedback (null response body if not exist)", response = Iterable.class)
-//    @ApiResponses({
-//            @ApiResponse(code = 200, message = "Get feedback success", response = FormFeedback.class),
-//            @ApiResponse(code = 403, message = "User isn't exist or role isn't student, monitor"),
-//    })
-//    @GetMapping("/feedback")
-//    public ResponseEntity<FormFeedback> getMonitorFeedback(@RequestParam(value = "studentID") String studentID) {
-//        if (!userAuthService.isUserValid(studentID, User.STUDENT_ROLE, User.MONITOR_ROLE)) {
-//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-//        }
-//        return monitorFeedbackService.getMonitorFeedback(studentID);
-//    }
+    @ApiOperation(value = "Get monitor feedback (null response body if not exist)", response = Iterable.class)
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Get feedback success", response = FormFeedback.class),
+            @ApiResponse(code = 403, message = "User isn't exist or role isn't student, monitor"),
+    })
+    @GetMapping("/feedback")
+    public ResponseEntity<FormFeedback> getMonitorFeedback(@RequestParam(value = "studentID") String studentID) {
+        if (!userAuthService.isUserValid(studentID, User.STUDENT_ROLE, User.MONITOR_ROLE)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        return monitorFeedbackService.getMonitorFeedback(studentID);
+    }
 }

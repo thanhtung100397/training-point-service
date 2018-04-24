@@ -21,6 +21,7 @@ public class AuthController {
     @ApiOperation(value = "Create new account", response = Iterable.class)
     @ApiResponses({
             @ApiResponse(code = 200, message = "Create account success"),
+            @ApiResponse(code = 403, message = "Account with role monitor or adviser exist"),
             @ApiResponse(code = 409, message = "Account exist")
     })
     @PostMapping("/register")

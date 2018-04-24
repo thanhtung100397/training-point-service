@@ -74,15 +74,15 @@ public class AdviserController {
         return adviserFeedbackService.getAllAdviserFeedback();
     }
 
-    @ApiOperation(value = "Get adviser feedback (api for student)", response = Iterable.class)
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Get training point forms success", responseContainer = "List", response = FormFeedback.class)
-    })
-    @GetMapping("/feedback/{studentID}")
-    public ResponseEntity<FormFeedback> getAdviserFeedback(@PathVariable("studentID") String studentID) {
-        if (!userAuthService.isUserValid(studentID, User.STUDENT_ROLE, User.MONITOR_ROLE)) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-        return adviserFeedbackService.getAdviserFeedback(studentID);
-    }
+//    @ApiOperation(value = "Get adviser feedback (api for student)", response = Iterable.class)
+//    @ApiResponses({
+//            @ApiResponse(code = 200, message = "Get training point forms success", responseContainer = "List", response = FormFeedback.class)
+//    })
+//    @GetMapping("/feedback/{studentID}")
+//    public ResponseEntity<FormFeedback> getAdviserFeedback(@PathVariable("studentID") String studentID) {
+//        if (!userAuthService.isUserValid(studentID, User.STUDENT_ROLE, User.MONITOR_ROLE)) {
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        }
+//        return adviserFeedbackService.getAdviserFeedback(studentID);
+//    }
 }

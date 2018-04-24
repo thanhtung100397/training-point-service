@@ -10,13 +10,11 @@ import java.util.Date;
 public class MonitorFeedback {
     @Id
     private String userID;
-    private String monitorID;
     private String state;
     private Date createdDate;
 
-    public MonitorFeedback(String userID, String monitorID, String state) {
+    public MonitorFeedback(String userID, String state) {
         this.userID = userID;
-        this.monitorID = monitorID;
         this.state = state;
         setCreatedDate(new Date());
     }
@@ -30,14 +28,6 @@ public class MonitorFeedback {
 
     public void setUserID(String userID) {
         this.userID = userID;
-    }
-
-    public String getMonitorID() {
-        return monitorID;
-    }
-
-    public void setMonitorID(String monitorID) {
-        this.monitorID = monitorID;
     }
 
     public String getState() {

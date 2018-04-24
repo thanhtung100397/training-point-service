@@ -18,6 +18,25 @@ public class UserAuthService {
         if (userRepository.existsByUsername(userDto.getUsername())) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+        switch (userDto.getRole()) {
+            case User.MONITOR_ROLE: {
+                if (userRepository.existsByRole(User.MONITOR_ROLE)) {
+                    return new ResponseEntity(HttpStatus.FORBIDDEN);
+                }
+            }
+            break;
+
+            case User.ADVISER_ROLE: {
+                if (userRepository.existsByRole(User.ADVISER_ROLE)) {
+                    return new ResponseEntity(HttpStatus.FORBIDDEN);
+                }
+            }
+            break;
+
+            default: {
+                break;
+            }
+        }
         userRepository.save(new User(userDto));
         return new ResponseEntity(HttpStatus.OK);
     }

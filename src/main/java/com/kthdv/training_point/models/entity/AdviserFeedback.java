@@ -10,13 +10,11 @@ import java.util.Date;
 public class AdviserFeedback {
     @Id
     private String userID;
-    private String adviserID;
     private String state;
     private Date createdDate;
 
-    public AdviserFeedback(String userID, String adviserID, String state) {
+    public AdviserFeedback(String userID, String state) {
         this.userID = userID;
-        this.adviserID = adviserID;
         this.state = state;
         setCreatedDate(new Date());
     }
@@ -30,14 +28,6 @@ public class AdviserFeedback {
 
     public void setUserID(String userID) {
         this.userID = userID;
-    }
-
-    public String getAdviserID() {
-        return adviserID;
-    }
-
-    public void setAdviserID(String adviserID) {
-        this.adviserID = adviserID;
     }
 
     public String getState() {

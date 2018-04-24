@@ -1,8 +1,11 @@
 package com.kthdv.training_point.services;
 
+import com.kthdv.training_point.constant.Constant;
 import com.kthdv.training_point.dao.AdviserFeedbackRepository;
 import com.kthdv.training_point.dao.AdviserReceivedFormRepository;
+import com.kthdv.training_point.dao.MonitorFeedbackRepository;
 import com.kthdv.training_point.models.entity.AdviserFeedback;
+import com.kthdv.training_point.models.entity.MonitorFeedback;
 import com.kthdv.training_point.models.response.FormFeedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,8 @@ public class AdviserFeedbackService {
     @Autowired
     private AdviserReceivedFormRepository adviserReceivedFormRepository;
     @Autowired
+    private MonitorFeedbackRepository monitorFeedbackRepository;
+    @Autowired
     private AdviserFeedbackRepository adviserFeedbackRepository;
 
     public ResponseEntity<List<FormFeedback>> getAllAdviserFeedback() {
@@ -30,7 +35,10 @@ public class AdviserFeedbackService {
     @Transactional
     public ResponseEntity submitFeedback(String adviserID, String formID, String state) {
         adviserReceivedFormRepository.deleteByUserID(formID);
-        adviserFeedbackRepository.save(new AdviserFeedback(formID, adviserID, state));
+        adviserFeedbackRepository.save(new AdviserFeedback(formID, state));
+        if(state.equals(Constant.ACCEPTED_STATE)){
+            monitorFeedbackRepository.save(new MonitorFeedback(formID, state));
+        }
         return new ResponseEntity(HttpStatus.OK);
     }
 }
