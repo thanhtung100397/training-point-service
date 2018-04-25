@@ -12,12 +12,14 @@ import java.util.Map;
 public class StudentTrainingPointForm {
     private String studentID;
     private String studentName;
+    private String studentUsername;
     private long lastModified;
     private Map<String, Integer> data;
 
     public StudentTrainingPointForm(User student, TrainingPointForm trainingPointForm) {
         setStudentID(student.getId());
         setStudentName(student.getFullName());
+        setStudentUsername(student.getUsername());
         setLastModified(trainingPointForm.getLastModified().getTime());
         setData(trainingPointForm.getData());
     }
@@ -40,6 +42,14 @@ public class StudentTrainingPointForm {
 
     public void setStudentName(String studentName) {
         this.studentName = studentName;
+    }
+
+    public String getStudentUsername() {
+        return studentUsername;
+    }
+
+    public void setStudentUsername(String studentUsername) {
+        this.studentUsername = studentUsername;
     }
 
     public long getLastModified() {

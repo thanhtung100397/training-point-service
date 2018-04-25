@@ -7,11 +7,13 @@ import java.util.Date;
 public class StudentTrainingPointFormPreview {
     private String studentID;
     private String studentName;
+    private String studentUsername;
     private long lastModified;
 
     public StudentTrainingPointFormPreview(User student, Date lastMofified) {
         setStudentID(student.getId());
         setStudentName(student.getFullName());
+        setStudentUsername(student.getUsername());
         setLastModified(lastMofified.getTime());
     }
 
@@ -33,6 +35,14 @@ public class StudentTrainingPointFormPreview {
 
     public void setStudentName(String studentName) {
         this.studentName = studentName;
+    }
+
+    public String getStudentUsername() {
+        return studentUsername;
+    }
+
+    public void setStudentUsername(String studentUsername) {
+        this.studentUsername = studentUsername;
     }
 
     public long getLastModified() {
