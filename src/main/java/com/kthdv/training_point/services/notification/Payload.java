@@ -1,4 +1,4 @@
-package com.kthdv.training_point.services;
+package com.kthdv.training_point.services.notification;
 
 public class Payload {
     private Object data;

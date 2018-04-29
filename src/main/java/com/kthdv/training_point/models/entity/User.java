@@ -21,6 +21,10 @@ public class User {
     private String password;
     private String role;
 
+    public User(String fullName) {
+        this.fullName = fullName;
+    }
+
     public User(UserDto userDto) {
         setFullName(userDto.getFullName());
         setUsername(userDto.getUsername());

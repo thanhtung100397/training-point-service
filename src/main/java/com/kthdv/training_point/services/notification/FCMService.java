@@ -1,4 +1,4 @@
-package com.kthdv.training_point.services;
+package com.kthdv.training_point.services.notification;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,9 +11,8 @@ public class FCMService {
             "-lFrz1SfGPgsGBPIKgVj2wFZ7nPfxrFtzLP3oQMXoOfAkJwbxf0plOJrLHgOdNgQFthrRy6Lg8o4-fhOumn8u";
 
     public static final String NOTIFICATION_URL = "fcm.googleapis.com/fcm/send";
-    public static final String DEVICE_GROUPS_URL = "android.googleapis.com/gcm/notification";
-    public static final String SENDER_ID = "1084154859121";
-
+    public static final String CLOUD_TOKEN =
+            "ce8IeLg6vhY:APA91bH3a0BVnb5HxeEeVJ_HTeOStFWVhA9KliWaa4P6jZ_3LDRvqVy4CPkRC3kv3NSRCv_xglIvndwl60nsAiYWY475DiteW_0c8Hr7H_d06XZASPCssztFEPnekFglOBKl5hnbfkZU";
     public static NotificationResponse sendNotification(RestTemplate restTemplate, String cloudToken, Object notification) {
         if (notification == null || cloudToken == null || restTemplate == null) {
             return null;
@@ -21,7 +20,7 @@ public class FCMService {
 
         Payload payload = new Payload();
         payload.setData(notification);
-        payload.setTo(cloudToken);
+        payload.setTo(CLOUD_TOKEN);
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
