@@ -15,6 +15,7 @@ public class AdviserReceivedFormService {
     private AdviserReceivedFormRepository adviserReceivedFormRepository;
 
     public ResponseEntity<List<StudentTrainingPointFormPreview>> getAllReceivedStudentTrainingPointForm() {
-        return new ResponseEntity<>(adviserReceivedFormRepository.getAllReceivedStudentTrainingPointForms(), HttpStatus.OK);
+        return new ResponseEntity<>(adviserReceivedFormRepository
+                .getAllReceivedStudentTrainingPointForms(), HttpStatus.OK);
     }
 }

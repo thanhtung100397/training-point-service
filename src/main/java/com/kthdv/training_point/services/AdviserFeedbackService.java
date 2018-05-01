@@ -33,7 +33,7 @@ public class AdviserFeedbackService {
     }
 
     @Transactional
-    public ResponseEntity submitFeedback(String adviserID, String formID, String state) {
+    public ResponseEntity submitFeedback(String formID, String state) {
         adviserReceivedFormRepository.deleteByUserID(formID);
         adviserFeedbackRepository.save(new AdviserFeedback(formID, state));
         if(state.equals(Constant.ACCEPTED_STATE)){

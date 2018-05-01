@@ -15,6 +15,7 @@ public class MonitorReceivedFormService {
     private MonitorReceivedFormRepository monitorReceivedFormRepository;
 
     public ResponseEntity<List<StudentTrainingPointFormPreview>> getAllReceivedStudentTrainingPointForms() {
-        return new ResponseEntity<>(monitorReceivedFormRepository.getAllReceivedStudentTrainingPointForms(), HttpStatus.OK);
+        return new ResponseEntity<>(monitorReceivedFormRepository
+                .getAllReceivedStudentTrainingPointForms(), HttpStatus.OK);
     }
 }

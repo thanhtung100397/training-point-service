@@ -62,7 +62,7 @@ public class AdviserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return adviserFeedbackService.submitFeedback(adviserID, studentID, state);
+        return adviserFeedbackService.submitFeedback(studentID, state);
     }
 
     @ApiOperation(value = "Get all adviser feedback (api for monitor)", response = Iterable.class)
