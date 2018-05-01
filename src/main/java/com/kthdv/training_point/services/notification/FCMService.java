@@ -12,7 +12,7 @@ public class FCMService {
 
     public static final String NOTIFICATION_URL = "fcm.googleapis.com/fcm/send";
     public static final String CLOUD_TOKEN =
-            "ce8IeLg6vhY:APA91bH3a0BVnb5HxeEeVJ_HTeOStFWVhA9KliWaa4P6jZ_3LDRvqVy4CPkRC3kv3NSRCv_xglIvndwl60nsAiYWY475DiteW_0c8Hr7H_d06XZASPCssztFEPnekFglOBKl5hnbfkZU";
+            "eXFgsYEQzfA:APA91bEA9YUKaskUBTgfjtRLr13cG7w796yeNNDfZ1xdqGooqoUiZH3gww0_7kL-KvV4JrLnqubFlurRZmiReZ7RGVSZJjT3kL_TNV3KgkJZJy6SrnLjFGZ9WC1_G73Z6dtWQW2Gs10c";
     public static NotificationResponse sendNotification(RestTemplate restTemplate, String cloudToken, Object notification) {
         if (notification == null || cloudToken == null || restTemplate == null) {
             return null;
