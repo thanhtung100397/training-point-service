@@ -1,5 +1,6 @@
 package com.kthdv.training_point.controllers;
 
+import com.google.common.eventbus.Subscribe;
 import com.kthdv.training_point.dao.NotificationRepository;
 import com.kthdv.training_point.models.entity.Gas;
 import com.kthdv.training_point.models.entity.Notification;
@@ -25,10 +26,16 @@ public class NotificationController {
 
     @PostMapping("/fcmtoken")
     public ResponseEntity updateFCMToken(@RequestBody String fcmToken) {
-        Notification notification = new Notification();
-        notification.setFcmToken(fcmToken);
-        notificationRepository.save(notification);
-        return new ResponseEntity(HttpStatus.OK);
+        if(!fcmToken.isEmpty()){
+            Notification notification = new Notification();
+            notification.setFcmToken(fcmToken);
+            if (!fcmToken.isEmpty())
+                notificationRepository.save(notification);
+            return new ResponseEntity(HttpStatus.OK);
+        }else {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @GetMapping("/info/{gas}/{tempurature}")
@@ -41,4 +48,6 @@ public class NotificationController {
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
+
 }
