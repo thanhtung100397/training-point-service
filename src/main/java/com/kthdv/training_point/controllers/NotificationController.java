@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/gas")
 @CrossOrigin(origins = "*")
@@ -22,7 +24,7 @@ public class NotificationController {
     private NotificationRepository notificationRepository;
 
     @PostMapping("/fcmtoken")
-    public ResponseEntity updateFCMToken(@RequestBody String fcmToken){
+    public ResponseEntity updateFCMToken(@RequestBody String fcmToken) {
         Notification notification = new Notification();
         notification.setFcmToken(fcmToken);
         notificationRepository.save(notification);
@@ -32,8 +34,11 @@ public class NotificationController {
     @GetMapping("/info/{gas}/{tempurature}")
     public ResponseEntity getNoti(@PathVariable("gas") double gas,
                                   @PathVariable("tempurature") double tempurature) {
-        Gas g = new Gas(gas,tempurature);
-        FCMService.sendNotification(restTemplate, FCMService.CLOUD_TOKEN, g);
+        Gas g = new Gas(gas, tempurature);
+        List<Notification> ls = notificationRepository.findAll();
+        for (Notification notification : ls) {
+            FCMService.sendNotification(restTemplate, notification.getFcmToken(), g);
+        }
         return new ResponseEntity(HttpStatus.OK);
     }
 }

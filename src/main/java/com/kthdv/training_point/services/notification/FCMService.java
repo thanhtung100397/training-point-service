@@ -20,7 +20,7 @@ public class FCMService {
 
         Payload payload = new Payload();
         payload.setData(notification);
-        payload.setTo(CLOUD_TOKEN);
+        payload.setTo(cloudToken);
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
