@@ -1,6 +1,8 @@
 package com.kthdv.training_point.controllers;
 
+import com.kthdv.training_point.dao.NotificationRepository;
 import com.kthdv.training_point.models.entity.Gas;
+import com.kthdv.training_point.models.entity.Notification;
 import com.kthdv.training_point.models.entity.User;
 import com.kthdv.training_point.services.notification.FCMService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,17 @@ import org.springframework.web.client.RestTemplate;
 public class NotificationController {
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private NotificationRepository notificationRepository;
+
+    @PostMapping("/fcmtoken")
+    public ResponseEntity updateFCMToken(@RequestBody String fcmToken){
+        Notification notification = new Notification();
+        notification.setFcmToken(fcmToken);
+        notificationRepository.save(notification);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @GetMapping("/info/{gas}/{tempurature}")
     public ResponseEntity getNoti(@PathVariable("gas") double gas,
